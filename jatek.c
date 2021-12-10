@@ -1,0 +1,131 @@
+//
+// Created by Kaletris on 2021. 12. 10..
+//
+
+#include "jatek.h"
+#include "stdio.h"
+#include "debugmalloc.h"
+#include "string.h"
+#include "types.h"
+#include "stdbool.h"
+
+char** tabla_lefoglalas(){
+    //10sor
+    char** tabla = (char**) malloc(sizeof(char*)*10);
+    for (int i = 0; i < 10; ++i) {
+        //10+1 oszlop ('\0')
+        tabla[i] = (char*) malloc(sizeof(char)*11);
+    }
+    return tabla;
+}
+
+void tabla_felszabaditas(char** tabla){
+    for (int i = 0; i < 10; ++i) {
+        free(tabla[i]);
+    }
+    free(tabla);
+}
+
+void tabla_inicializacio(char** tabla){
+    strcpy(tabla[0], "###### ###\0");
+    strcpy(tabla[1], "#$   #   #\0");
+    strcpy(tabla[2], "#### ### #\0");
+    strcpy(tabla[3], "#        #\0");
+    strcpy(tabla[4], "# #### ###\0");
+    strcpy(tabla[5], "# #    #$#\0");
+    strcpy(tabla[6], "# ##$# # #\0");
+    strcpy(tabla[7], "#@ ### # #\0");
+    strcpy(tabla[8], "#   $#   #\0");
+    strcpy(tabla[9], "##########\0");
+}
+
+Koordinata tabla_jatekos_helyzete(char** tabla){
+    Koordinata jatekos;
+    for (int i = 0; i < 10; ++i) {
+        for (int j = 0; j < 10; ++j) {
+            if(tabla[i][j] == '@'){
+                jatekos.x = i;
+                jatekos.y = j;
+                return jatekos;
+            }
+        }
+    }
+}
+
+int tabla_kincsek_szama(char** tabla){
+    int kincsekSzama = 0;
+    for (int i = 0; i < 10; ++i) {
+        for (int j = 0; j < 10; ++j) {
+            if(tabla[i][j] == '$'){
+                kincsekSzama++;
+            }
+        }
+    }
+    return kincsekSzama;
+}
+
+void tabla_kiir(char** tabla){
+    for (int i = 0; i < 10; ++i) {
+        printf("%s\n", tabla[i]);
+    }
+}
+
+bool mehet(char** tabla, Irany irany){
+    Koordinata jatekos = tabla_jatekos_helyzete(tabla);
+    switch (irany) {
+        case fel:
+            if(tabla[jatekos.x-1][jatekos.y] == '#'){
+                return false;
+            }
+            return true;
+        case le:
+            if(tabla[jatekos.x+1][jatekos.y] == '#'){
+                return false;
+            }
+            return true;
+        case balra:
+            if(tabla[jatekos.x][jatekos.y-1] == '#'){
+                return false;
+            }
+            return true;
+        case jobbra:
+            if(tabla[jatekos.x][jatekos.y+1] == '#'){
+                return false;
+            }
+            return true;
+        default:
+            return false;
+    }
+}
+
+Lepes tabla_jatekos_leptetes(char** tabla, Irany irany){
+    Koordinata jatekos = tabla_jatekos_helyzete(tabla);
+    if(!mehet(tabla, irany)){
+        return fal;
+    }
+    switch (irany) {
+        case fel:
+            jatekos.x--;
+            break;
+        case le:
+            jatekos.x++;
+            break;
+        case balra:
+            jatekos.y--;
+            break;
+        case jobbra:
+            jatekos.y++;
+            break;
+        default:
+            break;
+    }
+
+    if(jatekos.x == 0 || jatekos.x == 10 || jatekos.y == 0 || jatekos.y == 9){
+        return fal;
+    }
+
+    if (tabla[jatekos.x][jatekos.y] == '$'){
+        return kincs;
+    }
+    return ures;
+}
