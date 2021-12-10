@@ -45,20 +45,20 @@ int main() {
                 break;
             case kincs:
                 tabla_kiir(tabla);
-                printf("\n\nKincset talaltal!\n\n");
+                printf("\nKincset talaltal!\n");
                 break;
             case fal:
                 tabla_kiir(tabla);
-                printf("\n\nFalba nem lehet lepni!\n\n");
+                printf("\nFalba nem lehet lepni!\n");
                 break;
             case kijarat:
                 if(tabla_kincsek_szama(tabla) == 0){
                     tabla_kiir(tabla);
-                    printf("\n\nNyertel!\n\n");
+                    printf("\nNyertel!\n");
                     jatekVege = true;
                 } else {
                     tabla_kiir(tabla);
-                    printf("\n\nVesztettel!\n\n");
+                    printf("\nVesztettel!\n");
                     jatekVege = true;
                 }
                 break;

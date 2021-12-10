@@ -68,6 +68,8 @@ void tabla_kiir(char** tabla){
     for (int i = 0; i < 10; ++i) {
         printf("%s\n", tabla[i]);
     }
+
+    iranyitas_kiiras();
 }
 
 bool mehet(char** tabla, Irany irany){
@@ -134,4 +136,8 @@ Lepes tabla_jatekos_leptetes(char** tabla, Irany irany){
         return kincs;
     }
     return ures;
+}
+
+void iranyitas_kiiras(){
+    printf("Az iranyitas nyilakkal tortenik!\n");
 }

@@ -24,4 +24,6 @@ bool mehet(char** tabla, Irany irany);
 
 Lepes tabla_jatekos_leptetes(char** tabla, Irany irany);
 
+void iranyitas_kiiras();
+
 #endif //LABYRINTH_JATEK_H
