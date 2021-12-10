@@ -5,16 +5,18 @@
 #ifndef LABYRINTH_TYPES_H
 #define LABYRINTH_TYPES_H
 
+#include "econio.h"
+
 typedef struct Koordinata{
     int x;
     int y;
 }Koordinata;
 
 typedef enum Irany{
-    fel = 'w',
-    balra = 'a',
-    le = 's',
-    jobbra = 'd'
+    fel = KEY_UP,
+    balra = KEY_LEFT,
+    le = KEY_DOWN,
+    jobbra = KEY_RIGHT
 }Irany;
 
 typedef enum Lepes{

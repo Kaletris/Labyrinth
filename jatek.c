@@ -3,11 +3,11 @@
 //
 
 #include "jatek.h"
-#include "stdio.h"
+#include <stdio.h>
 #include "debugmalloc.h"
-#include "string.h"
+#include <string.h>
 #include "types.h"
-#include "stdbool.h"
+#include <stdbool.h>
 
 char** tabla_lefoglalas(){
     //10sor
@@ -100,31 +100,37 @@ bool mehet(char** tabla, Irany irany){
 
 Lepes tabla_jatekos_leptetes(char** tabla, Irany irany){
     Koordinata jatekos = tabla_jatekos_helyzete(tabla);
+    int x = jatekos.x;
+    int y = jatekos.y;
     if(!mehet(tabla, irany)){
         return fal;
     }
     switch (irany) {
         case fel:
-            jatekos.x--;
+            tabla[x][y] = ' ';
+            tabla[--x][y] = '@';
             break;
         case le:
-            jatekos.x++;
+            tabla[x][y] = ' ';
+            tabla[++x][y] = '@';
             break;
         case balra:
-            jatekos.y--;
+            tabla[x][y] = ' ';
+            tabla[x][--y] = '@';
             break;
         case jobbra:
-            jatekos.y++;
+            tabla[x][y] = ' ';
+            tabla[x][++y] = '@';
             break;
         default:
             break;
     }
 
-    if(jatekos.x == 0 || jatekos.x == 10 || jatekos.y == 0 || jatekos.y == 9){
-        return fal;
+    if(x == 0 || x == 9 || y == 0 || y == 9){
+        return kijarat;
     }
 
-    if (tabla[jatekos.x][jatekos.y] == '$'){
+    if (tabla[x][y] == '$'){
         return kincs;
     }
     return ures;

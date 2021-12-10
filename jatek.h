@@ -6,7 +6,7 @@
 #define LABYRINTH_JATEK_H
 
 #include "types.h"
-#include "stdbool.h"
+#include <stdbool.h>
 
 char** tabla_lefoglalas();
 
